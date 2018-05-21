@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS `zm_user_visit_log`(
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `unique_id` VARCHAR(32) NOT NULL DEFAULT '',
+  `sid` VARCHAR(32) NOT NULL DEFAULT '',
+  `request_uri` VARCHAR(255) NOT NULL DEFAULT '',
+  `client_ip` VARCHAR(15) NOT NULL DEFAULT '',
+  `city` VARCHAR(32) NOT NULL DEFAULT '',
+  `device` VARCHAR(16) NOT NULL DEFAULT '',
+  `ua` VARCHAR(128) NOT NULL DEFAULT '',
+  `visit_time` INT NOT NULL DEFAULT 0 COMMENT '访问时间',
+  `line_time` INT NOT NULL DEFAULT 0 COMMENT '停留时间',
+  `add_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '入库时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_id` (`unique_id`),
+  KEY `sid` (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

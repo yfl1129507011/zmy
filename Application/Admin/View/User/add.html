@@ -1,0 +1,61 @@
+<div class="table-class">
+	<div class="head"><strong><if condition="$_action eq 'add'">添加<else />编辑</if>用户</strong></div>
+	<div class="operate align-r">
+		<input type="button" class="button border-green" value="返回列表" onclick="location.href='{:U('index')}'" />
+	</div>
+	<form action="{:U($_action)}" method="post" class="form">
+	<table>
+		<tr>
+			<th>用户名称</th>
+			<td><input class="input" type="text" name="username" value="{$_info.username}"><span class="check-tips">（用户名会作为默认的昵称）</span></td>
+		</tr>
+		<tr>
+			<th>登录密码</th>
+			<td><input class="input" type="password" name="password" /><span class="check-tips">（用户密码不能少于6位）</span></td>
+		</tr>
+		<tr>
+			<th>确认密码</th>
+			<td><input class="input" type="password" name="repassword" /></td>
+		</tr>
+		<!--<tr>
+			<th>管理员类型</th>
+			<td>
+				<select name="role_id">
+				    <option value="0">-请选择类型-</option>
+				<foreach name='role_list' item='value'>
+					<option value="{$value.role_id}">{$value.role_name}</option>
+				</foreach>
+				</select>
+			</td>
+		</tr>-->
+		<tr>
+			<th>邮箱地址</th>
+			<td><input class="input" type="text" name="email" value="{$_info.email}"><span class="check-tips">（用户邮箱地址）</span></td>
+		</tr>
+		<tr>
+			<th>手机号码</th>
+			<td><input class="input" type="text" name="mobile" value="{$_info.mobile}"><span class="check-tips">（用户手机号码）</span></td>
+		</tr>
+		<tr>
+			<td><input type="hidden" name="uid" value="{$_info.uid}"></td>
+			<td><input class="submit" type="submit" value="确认提交" id="form-submit"><span class="form-check"></span></td>
+		</tr>
+	</table>
+    </form>
+</div>
+<script>
+	$(function(){
+		$('#form-submit').click(function(){
+			var query = $('.form').serialize();
+			var target = $('.form').get(0).action;
+			$.post(target,query).success(function(data){
+				if(data.status == 1){
+					location.href = data.url;
+				}else{
+					$('.form-check').text(data.info);
+				}
+			});
+			return false;
+		});
+	});
+</script>

@@ -1,0 +1,117 @@
+<div class="table-class">
+	<div class="head"><strong>用户列表(<b style="color: #0E774A">{$_total}</b>)</strong></div>
+	<div class="operate" style="height: 30px">
+		<!--<input type="button" class="button check-all" value="全选" all="false" />-->
+		<!--<input type="button" class="button border-green" value="添加用户" onclick="location.href='{:U('add')}'" />-->
+		<!--<input type="button" class="button border-blue " value="批量禁用" />-->
+		<div class="search">
+			<input type="text" name="nickname" class="search-input" value="{$_username}" placeholder="请输入用户昵称或者ID">
+			<a class="sch-btn" href="javascript:;" id="search" url="__SELF__"><i class="btn-search"></i></a>
+		</div>
+	</div>
+	<table id="box" class="center">
+		<tr class="title">
+			<!--<th>选择</th>-->
+			<th>ID编号</th>
+			<th>用户名称</th>
+			<th>登录次数</th>
+			<th>最后登录时间</th>
+			<th>最后登陆IP</th>
+			<th>注册时间</th>
+			<th>状态</th>
+			<!--<th>操作</th>-->
+		</tr>
+		<notempty name="_list">
+		<foreach name='_list' item='value' key="k">
+		<tr>
+			<!--<td><input class="ids" type="checkbox" name="ids[]" value="{$value.uid}" /></td>-->
+			<td>{$value.uid}</td>
+			<td>{$value.username}</td>
+			<td>{$value.login_num}</td>
+			<td>{$value.last_login_time|date='Y-m-d H:i:s',###}</td>
+			<td>{:long2ip($value['last_login_ip'])}</td>
+			<td>{$value.reg_time|date='Y-m-d H:i:s',###}</td>
+			<td>{$value.status_text}</td>
+			<!--<td align="center">
+				<input type="button" class="button border-blue ajax-get" value="修改" query="{:U('edit?uid='.$value['uid'])}" />
+				<input type="button" class="button border-red confirm ajax-get" value="禁用" query="__SELF__?uid={$value['uid']}" />
+				<input type="button" class="button border-red confirm ajax-get" value="删除" query="{:U('del?uid='.$value['uid'])}" />
+			</td>-->
+		</tr>
+		</foreach>
+		</notempty>
+	</table>
+	{$_page}
+</div>
+<script>
+	$(function(){
+		//回车搜索
+		$(".search-input").keyup(function(e){
+			if(e.keyCode === 13){
+				$("#search").click();
+				return false;
+			}
+		});
+		$('#search').on('click', function () {
+			var username = $('.search-input').val();
+			if(!username) username = '';
+			var url = $(this).attr('url');
+			location.href = url+'?username='+username;
+		});
+		//全选的实现
+		$('.check-all').on('click', function(){
+			var all = $(this).attr('all');
+			var check = (all=='false')?true:false;
+			$('.ids').prop('checked', check);
+			$(this).attr('all',check);
+		});
+		$(".ids").click(function(){
+			var option = $(".ids");
+			option.each(function(i){
+				if(!this.checked){
+					$(".check-all").attr("all", false);
+					return false;
+				}else{
+					$(".check-all").attr("all", true);
+				}
+			});
+		});
+
+		$('.ajax-get').click(function(){
+			if($(this).hasClass('confirm')){
+				var _name = $(this).val();
+				var _params = {};
+				if(confirm('确定要'+_name+'?')){
+					var query = $(this).attr('query');
+					if(!query) return;
+					if($(this).hasClass('bulk')){
+						var uids = []
+						$('.ids:checked').each(function(i){
+							uids[i] = this.value;
+						});
+						console.log(uids);
+						if(uids.length == 0){
+							alert('请选择要'+_name+'的用户！');return;
+						}
+						_params.uid = uids;
+					}
+					$.get(query,_params).success(function(data){
+						if(data.status == 1){
+							if(data.url){
+								location.href = data.url;
+							}else{
+								location.reload();
+							}
+						}else{
+							alert(data.info);
+						}
+					});
+				}
+			}else{
+				var query = $(this).attr('query');
+				if(!query) return;
+				location.href = query;
+			}
+		});
+	});
+</script>

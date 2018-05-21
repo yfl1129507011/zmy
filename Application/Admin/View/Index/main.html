@@ -1,0 +1,56 @@
+<div class="sys_info">
+	<div class="head"><strong>系统信息</strong></div>
+	<table>
+		<tr class="title">
+			<th align="left" colspan="2" width="50%">服务器信息</th>
+			<th align="left" colspan="2" width="50%">系统基本信息</th>
+		<tr>
+		<tr>
+			<td>服务器操作系统：</td>
+			<td>{$Think.const.PHP_OS}</td>
+			<td>总策划：</td>
+			<td>纪艳</td>
+		</tr>
+		<tr>
+			<td>运行环境：</td>
+			<td>{$_SERVER['SERVER_SOFTWARE']}</td>
+			<td>官方网址：</td>
+			<td><a style="color: green" href="http://{$Think.server.http_host}">{$Think.server.http_host}</a></td>
+		</tr>
+		<tr>
+			<td>MYSQL版本：</td>
+			<php>
+				$system_info_mysql = M()->query("select version() as v;");
+			</php>
+			<td>{$system_info_mysql.0.v}</td>
+			<td>系统名称：</td>
+			<td>投美后台管理系统</td>
+		</tr>
+		<tr>
+			<td>上传限制：</td>
+			<td>{:ini_get('upload_max_filesize')}</td>
+			<td>产品团队：</td>
+			<td>纪艳 邹可新 杨飞龙</td>
+		</tr>
+	</table>
+</div>
+<div style="height: 30px"></div>
+<div class="site">
+	<div class="head"><strong>站点统计</strong></div>
+	<ul class="list">
+		<li><b>用户总数</b><a class="model-g" href="javascript:void();">{$_hm+$_tm+$_xm}</a></li>
+	</ul>
+</div>
+<!--<div class="schedule">
+	<div class="head"><strong>网站后台待办事项</strong></div>
+	<ul class="list">
+		<li><b>认证待审核:</b><a class="model-r" href="#">88</a></li>
+		<li><b>vip待审核:</b><a class="model-r" href="#">88</a></li>
+		<li><b>借款额度申请:</b><a class="model-r" href="#">88</a></li>
+		<li><b>逾期待处理:</b><a class="model-r" href="#">88</a></li>
+		<li><b>发标待审核:</b><a class="model-r" href="#">88</a></li>
+		<li><b>满标待审核:</b><a class="model-r" href="#">88</a></li>
+		<li><b>充值待审核:</b><a class="model-r" href="#">88</a></li>
+		<li><b>提现待审核:</b><a class="model-r" href="#">88</a></li>
+	</ul>
+</div>-->

@@ -1,0 +1,31 @@
+<div class="table-class">
+	<div class="head"><strong>修改个人信息</strong></div>
+	<form action="__SELF__" method="post">
+	<table id="box">
+		<tr>
+			<th>管理员名称</th>
+			<td><input class="input" type="text" name="admin_name" value="{$info.admin_name}"></td>
+		</tr>
+		<tr>
+			<th>登录密码</th>
+			<td><input class="input" type="password" name="admin_pwd"></td>
+		</tr>
+		<tr>
+			<th>确认密码</th>
+			<td><input class="input" type="password" name="check_pwd"></td>
+		</tr>
+		<tr>
+			<th>email地址</th>
+			<td><input class="input" type="text" name="email" value="{$info.email}"></td>
+		</tr>
+		<tr>
+			<th>手机号</th>
+			<td><input class="input" type="text" name="phone" value="{$info.phone}"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input class="submit" type="submit" value="确认提交"></td>
+		</tr>
+	</table>
+    </form>
+</div>

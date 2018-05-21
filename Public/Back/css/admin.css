@@ -1,0 +1,142 @@
+body,div,ul,li{
+	margin:0px;
+	padding:0px;
+}
+body{
+	color:#333;
+	font-size:12px;
+	font-family:微软雅黑;
+	background-color:#F2F9FD;
+}
+img{
+	border:0px none;
+}
+a:link,a:visited{
+	color:#333;
+	text-decoration:none;
+}
+ul,li{
+	list-style:none;
+}
+.head_left{
+	position:relative;
+	float:left;
+	width:180px;
+	margin-right:-180px;
+	text-align:center;
+	background-color:#E6F2FB;
+}
+.head_left .logo{
+	padding:13px 14px;
+	border-bottom:1px solid #B5CFD9;
+}
+.head_right{
+	float:right;
+	width:100%;
+	padding-top:15px;
+	background-color:#E6F2FB;
+}
+.main{
+	margin-left:180px;
+	border-bottom:5px solid #09C;
+	padding:0px 15px;
+	overflow:hidden;
+}
+.main .operate{
+	float:right;
+}
+.main .operate .home{
+	display:inline-block;
+	color:white;
+	width:48px;
+	height:16px;
+	line-height:16px;
+	padding:3px 5px;
+	background-color:#09C;
+	border:1px solid #09C;
+	border-radius:4px;
+}
+.main .operate .back{
+	display:inline-block;
+	color:white;
+	width:48px;
+	height:16px;
+	line-height:16px;
+	padding:3px 5px;
+	background-color:#F90;
+	border:1px solid #F90;
+	border-radius:4px;
+}
+.menu>li{
+	display:inline-block;
+	/*display:block;
+	float:left;*/
+	vertical-align:top;
+	position:relative;
+}
+.menu>li>a{
+	display:block;
+	font-weight:bold;
+	padding:5px 20px;
+	line-height:20px;
+	font-size:14px;
+	border:1px solid #09C;
+	border-radius:4px 4px 0px 0px;
+}
+.menu>li>a:hover,.menu>li>a.active{
+	background-color:#09C;
+	color:white;
+}
+.menu_list{
+	position:fixed;
+	/*border-right:1px solid #B5CFD9;*/
+	left:0px;
+	margin-top:41px;
+}
+.menu_list li>a{
+	display:inline-block;
+	width:140px;
+	height:40px;
+	line-height:40px;
+	padding-left:40px;
+	color:#333;
+	font-weight:bold;
+	font-size:15px;
+	border-bottom:1px solid #B5CFD9;
+}
+.menu_list li>a:hover,li>a.active{
+	background-color:#2C7;
+	color:white;
+}
+.admin_path{
+	line-height:20px;
+	padding:8px 15px;
+	margin-left:180px;
+	border-left:1px solid #B5CFD9;
+	border-bottom:1px solid #B5CFD9;
+}
+.admin_path .info{
+	float:right;
+}
+.admin_path .path{
+	float:left;
+}
+.admin_path .path>a{
+	color:#333;
+	font-weight:bold;
+}
+.admin_path .path>a:hover{
+	color:red;
+}
+
+.admin_main{
+	margin:0;
+	padding:0px;
+	position:fixed;
+	right:0;
+	bottom:0;
+	left:180px;
+	top:89px;
+	background-color:white;
+	border-left:1px solid #B5CFD9;
+}

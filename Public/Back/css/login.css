@@ -1,0 +1,159 @@
+@CHARSET "UTF-8";
+body,div,img,strong{
+	margin:0;
+	padding:0;
+}
+body{
+	font-size:12px;
+	color:#333;
+	font-family:微软雅黑, 宋体;
+	background-color:#E5F3DF;
+}
+a:link,a:visited{
+	color:white;
+	text-decoration:none;
+}
+a:hover{
+	color:red;
+	text-decoration:underline;
+}
+input:focus{/*去掉input中边框的focus效果*/
+    outline:none;
+}
+.login_top{
+	height:39px;
+	background:url(../img/topBg.gif) repeat-x 0px 0px;
+	font-size:16px;
+
+}
+.login_top .welcome{
+	height:39px;
+	line-height:39px;
+	background:url(../img/topleft.gif) no-repeat 0px 0px;
+	padding-left:38px;
+	color:white;
+	float:left;
+}
+.login_top .back{
+	height:39px;
+	line-height:39px;
+	padding-right:18px;
+	float:right;
+}
+
+.login_center{
+	width:393px;
+	margin:50px auto;
+}
+.login_center .logo{
+	height:62px;
+	text-align: center;
+}
+.login_center .logo .logo-word {
+	font-size: 30px;
+	display: inline-block;
+	margin-left: 10px;
+}
+.login_center .logo img{
+	border:0 none;
+}
+.login_center .login_form{
+	background-color:white;
+	border:1px solid #ddd;
+	border-radius:4px;
+}
+.login_center .login_form .title{
+	height:21px;
+	line-height:23px;
+	background-color:#F5F5F5;
+	border-radius:4px 4px 0px 0px;
+	border-bottom:1px solid #ddd;
+	padding:10px 15px;
+	font-size:14px;
+}
+.login_center .login_form .form_body{
+	padding:30px;
+}
+.login_center .login_form .form_body .field{
+	height:34px;
+	line-height:34px;
+	border:1px solid #ddd;
+	/*padding:6px;
+	margin-bottom:10px;*/
+	border-radius:4px;
+}
+/*用于JavaScript*/
+.login_center .login_form .form_body .error{
+	height:34px;
+	line-height:34px;
+	border:1px solid red;
+	/*padding:6px;
+	margin-bottom:10px;*/
+	border-radius:4px;
+}
+/*用于JavaScript*/
+.login_center .login_form .form_body .success{
+	height:34px;
+	line-height:34px;
+	border:1px solid green;
+	/*padding:6px;
+	margin-bottom:10px;*/
+	border-radius:4px;
+}
+/*用于JavaScript*/
+.login_center .login_form .form_body .focus{
+	height:34px;
+	line-height:34px;
+	border:0px solid #00AAEE;
+	/*padding:6px;
+	margin-bottom:10px;*/
+	border-radius:4px;
+}
+.login_center .login_form .form_body b{
+	float:left;
+	display:block;
+	width:66px;
+	height:34px;
+	text-align:center;
+	background-color:#F5F5F5;
+	border-radius:4px 0px 0px 4px;
+
+}
+.login_center .login_form .form_body .field input{
+	float:left;
+	display:block;
+	padding:6px 7px;
+	height:20px;
+	line-height:20px;
+	width:247px;
+	border:0px none;
+	color:#666;
+	border-radius:0px 4px 4px 0px;
+}
+.login_center .login_form .form_body input.verify{
+	width:130px;
+	border-right:1px solid #ddd;
+	border-radius:0px;
+}
+.login_center .login_form .form_body .passcode{
+	float:left;
+}
+.login_center .login_form .form_btn{
+	height:34px;
+	padding:10px 15px;
+	border-top:1px solid #ddd;
+	background-color:#F5F5F5;
+	text-align:center;
+	border-radius:0px 0px 4px 4px;
+}
+.login_center .login_form .form_btn input{
+	display:block;
+	height:34px;
+	width:361px;
+	margin:0px auto;
+	border:1px solid #0AE;
+	background-color:#0AE;
+	color:white;
+	font-size:16px;
+	border-radius:4px;
+}

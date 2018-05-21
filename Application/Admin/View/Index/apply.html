@@ -1,0 +1,39 @@
+<div class="table-class">
+	<div class="head"><strong>用户申请列表(<b style="color: #0E774A">{$_count}</b>)</strong></div>
+	<div class="operate" style="height: 30px">
+		<!--<input type="button" class="button check-all" value="全选" all="false" />-->
+		<!--<input type="button" class="button border-green" value="添加用户" onclick="location.href='{:U('add')}'" />-->
+		<!--<input type="button" class="button border-blue " value="批量禁用" />-->
+		<div class="search">
+			<input type="text" name="nickname" class="search-input" value="{$_username}" placeholder="请输入用户昵称或者ID">
+			<a class="sch-btn" href="javascript:;" id="search" url="__SELF__"><i class="btn-search"></i></a>
+		</div>
+	</div>
+	<table id="box" class="center">
+		<tr class="title">
+			<!--<th>选择</th>-->
+			<th>编号</th>
+			<th>用户名称</th>
+			<th>申请信息</th>
+			<th>添加时间</th>
+			<!--<th>操作</th>-->
+		</tr>
+		<notempty name="_list">
+		<foreach name='_list' item='value' key="k">
+		<tr>
+			<!--<td><input class="ids" type="checkbox" name="ids[]" value="{$value.uid}" /></td>-->
+			<td>{$k+1}</td>
+			<td>{$_userList[$value['user_id']]}</td>
+			<td>{$value.message}</td>
+			<td>{$value.add_time}</td>
+			<!--<td align="center">
+				<input type="button" class="button border-blue ajax-get" value="修改" query="{:U('edit?uid='.$value['uid'])}" />
+				<input type="button" class="button border-red confirm ajax-get" value="禁用" query="__SELF__?uid={$value['uid']}" />
+				<input type="button" class="button border-red confirm ajax-get" value="删除" query="{:U('del?uid='.$value['uid'])}" />
+			</td>-->
+		</tr>
+		</foreach>
+		</notempty>
+	</table>
+	{$_page}
+</div>
