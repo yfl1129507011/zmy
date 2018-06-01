@@ -1,42 +1,35 @@
 <header>
-  <div class="header">
-    <div class="logoBox fl"><a href="/" title="返回首页"><img src="__IMG__/u45.png" /></a></div>
-    <div class="logoDesc fl">
-      <span class="logoText">号美</span>
-      <span class="desc">基于粉丝深度画像的达人价值提升平台</span>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="//{$Think.server.http_host}/">众妙云</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+        <ul class="nav navbar-nav" id="nav-menu">
+          <li class="active"><a href="//{$Think.server.http_host}/">首页</a></li>
+          <li><a href="#about">行业趋势洞察</a></li>
+          <li><a href="#contact">消费者洞察</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <if condition="$userInfo['uid'] eq 0">
+            <li><a href="{:U('User/login')}">登录</a></li>
+            <li class="active"><a href="{:U('User/register')}">注册</a></li>
+            <else/>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$userInfo['username']} <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{:U('User/logout')}">退出登录</a></li>
+              </ul>
+            </li>
+          </if>
+        </ul>
+      </div>
     </div>
-    <div class="menu_mobile f">
-      <img src="/Public/static/img/btn.png">
-    </div>
-    <ul class="menuBox fr">
-      <li <if condition="$modelID eq 1"> class="active" </if> url="/" modelID={$modelID}>首页</li>
-      <li <if condition="$modelID eq 2"> class="active" </if> url="{:U('Kol/applyKol')}" modelID={$modelID}>画像申请</li>
-      <li <if condition="$modelID eq 3"> class="active" </if> url="{:U('Main/index')}" modelID={$modelID}>我的主页</li>
-      <php>if(is_login()):</php>
-      <li url="{:U('User/logout')}">退出</li>
-      <php>else:</php>
-      <li url="{:U('User/login')}" style="color: #F39570">登录</li>
-      <php>endif</php>
-    </ul>
-    <div class="cl"></div>
-  </div>
+  </nav>
 </header>
-<script>
-  $(function(){
-    $('.menuBox').on('click','li',function(){
-      var that = $(this);
-      if(!that.hasClass('active')) {
-        that.siblings().removeClass('active');
-        that.addClass('active');
-      }
-      var url = that.attr('url');
-      if(!url) return;
-      location.href = url;
-    });
-
-      //手机端点击btn出现标题
-      $('.menu_mobile').on("click",function(){
-          $('.menuBox').toggle();
-      });
-  });
-</script>

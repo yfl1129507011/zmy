@@ -7,6 +7,8 @@
  */
 namespace Home\Model;
 
+use Think\Model;
+
 class UserModel extends Model{
     public $error = '';
     /* 用户模型自动验证 */

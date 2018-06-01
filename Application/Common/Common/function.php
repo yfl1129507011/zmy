@@ -13,7 +13,7 @@ function is_login(){
     if (empty($user)) {
         return 0;
     } else {
-        return session('user_auth_sign_zm') == data_auth_sign($user) ? $user['uid'] : 0;
+        return session('user_auth_sign_zm') == data_auth_sign($user) ? $user : 0;
     }
 }
 
@@ -165,11 +165,7 @@ function importExcel($file='', $sheet=0){
     for($_row=1; $_row<=$rowCnt; $_row++){  //读取内容
         for($_column=0; $_column<=$columnCnt; $_column++){
             $cellId = $cellName[$_column].$_row;
-            if($_column == 0) {
-                $cellValue = gmdate('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($currSheet->getCell($cellId)->getValue()));
-            }else {
-                $cellValue = $currSheet->getCell($cellId)->getValue();
-            }
+            $cellValue = $currSheet->getCell($cellId)->getValue();
             if($cellValue instanceof PHPExcel_RichText){   //富文本转换字符串
                 $cellValue = $cellValue->__toString();
             }

@@ -19,15 +19,19 @@ class HomeController extends Controller{
         $this->error('页面不存在！', U('Index/index'));
     }
 
-    protected function _initialize(){
-        $uid = is_login();
-        if(!$uid){
+    protected function checkLogin(){
+        $user = is_login();
+        if(!$user){
             $jumpUrl = is_ssl()?'https://':'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
             header('Location: ' . U('User/login').'?back='.urlencode($jumpUrl));exit;
         }
-        define('UID', $uid);
+        define('UID', $user['uid']);
+    }
+
+    protected function _initialize(){
+        $this->userInfo = is_login();
         if($this->is_visit_log){
-            $this->addUserInfo();
+            $this->visit_uid = $this->addUserInfo();
         }
     }
 
@@ -35,16 +39,19 @@ class HomeController extends Controller{
      * 记录用户访问信息
      */
     protected function addUserInfo(){
+        $model = M('user_visit_log');
         $info = array();
         $info['sid'] = session_id();  // 用户session_id标识
+        $info['unique_id'] = md5($info['sid'].$info['request_uri'].time());
+        if($model->where(array('unique_id'=>$info['unique_id']))->find()) return '';
+
         $info['request_uri'] = __SELF__;
         $info['client_ip'] = get_client_ip(0,true);
         $info['city'] = taobaoIP($info['client_ip']);
         $info['device'] = getDevice();
         $info['ua'] = $_SERVER['HTTP_USER_AGENT'];
         $info['visit_time'] = NOW_TIME;
-        $info['unique_id'] = md5($info['sid'].$info['request_uri'].time());
-        M('user_visit_log')->add($info);
+        $model->add($info);
 
         return $info['unique_id'];
     }

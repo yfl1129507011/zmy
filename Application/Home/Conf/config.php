@@ -8,5 +8,6 @@ return array(
         '__CSS__'    => __ROOT__ . '/Public/Front/css',
         '__JS__'     => __ROOT__ . '/Public/Front/js',
         '__STATIC__'    => __ROOT__.'/Public/Static',
+        '__BOOTSTRAP__'    => __ROOT__.'/Public/bootstrap',
     ),
 );

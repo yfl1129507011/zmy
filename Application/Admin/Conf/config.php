@@ -19,4 +19,6 @@ return array(
     //配置模版布局
     'LAYOUT_ON' => true,  //开启layout模版
     'LAYOUT_name' => 'layout',
+
+    'URL_MODEL' => '1',
 );
