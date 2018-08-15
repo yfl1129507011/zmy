@@ -8,13 +8,16 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="//{$Think.server.http_host}/">众妙云</a>
+        <a class="navbar-brand" href="//{$Think.server.http_host}/">LOGO</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
         <ul class="nav navbar-nav" id="nav-menu">
-          <li class="active"><a href="//{$Think.server.http_host}/">首页</a></li>
-          <li><a href="#about">行业趋势洞察</a></li>
-          <li><a href="#contact">消费者洞察</a></li>
+          <li class="active"><a href="#share">研究分享</a></li>
+          <li><a href="#idea">项目提案</a></li>
+          <li><a href="#design">产品设计</a></li>
+          <li><a href="#buy">采购</a></li>
+          <li><a href="#supervise">项目监管</a></li>
+          <li><a href="#detection">售后检测</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <if condition="$userInfo['uid'] eq 0">
@@ -22,7 +25,7 @@
             <li class="active"><a href="{:U('User/register')}">注册</a></li>
             <else/>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$userInfo['username']} <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$userInfo['nickname']} <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="{:U('User/logout')}">退出登录</a></li>
               </ul>

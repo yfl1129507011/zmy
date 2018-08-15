@@ -1,0 +1,5 @@
+.navbar-default {
+    border:none;
+    background-color: #293c55;
+    z-index: 10000;
+}

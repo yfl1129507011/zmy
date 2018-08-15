@@ -1,48 +1,42 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <title>注册-{$title}</title>
+  <title>注册众上帐号</title>
   <meta charset="utf-8">
   <meta name="renderer" content="webkit"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-  <link rel="shortcut icon" type="image/x-icon" href="__IMG__/u45.png" />
+  <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="shortcut icon" href="favicon.ico">
   <link rel="stylesheet" href="__CSS__/sign.css"/>
   <link rel="stylesheet" href="__CSS__/inout.css"/>
 </head>
 <body>
 <div class="reg-wrapper">
-  <h2 style="margin: 15px 0" >
+  <h2 >
     <a href="/">
-      <!--<img class="logo" src="__IMG__/u45.png"/>-->
-      <span style="font-weight: bold;font-size: 22px;">{$title}</span>
+      <!--<img class="logo" src="/asset/img/logo/text-0f5be2e426.png"/>-->
+      <span style="font-weight: bold;font-size: 22px;">众上数字极品</span>
     </a>
   </h2>
-  <h3 style="font-weight: bold;text-align: center;">注册</h3>
-<!--  <h3 style="font-weight: bold;color: #F39570;">注册</h3>-->
+  <h3>注册</h3>
   <div class="fields">
-    <form action="__SELF__" id="main-form">
-      <!--<div class="row">
-        <input type="text" class="text large" name="name" placeholder="昵称"/>
-        <div class="error"></div>
-      </div>-->
+    <form id="main-form" action="__SELF__">
       <div class="row">
-        <input type="text" class="text large" name="username" id="userName" placeholder="手机号码(必填)"/>
+        <input type="text" class="text large isCheck" name="nickname" title="昵称" url="{:U('checkNick')}" placeholder="昵称"/>
         <div class="error"></div>
       </div>
       <div class="row">
-        <input type="password" class="text large" name="password" id="passWord" placeholder="设置密码(6-30位字符)"/>
+        <input type="text" class="text large isCheck" name="phone" title="手机号" id="field-phone" placeholder="手机号码(必填)"/>
+        <div class="error"></div>
+      </div>
+      <div class="row verify">
+        <input type="text" class="text large isCheck" name="code" title="验证码" placeholder="验证码(必填)"/>
+        <div class="button large dark" id="fetch-code" url="{:U('getCode')}">获取验证码</div>
         <div class="error"></div>
       </div>
       <div class="row">
-        <input type="password" class="text large" name="repassword" id="rePassword" placeholder="再次输入密码"/>
+        <input type="password" class="text large isCheck" name="password" title="密码" placeholder="设置密码(6-20位字符)"/>
         <div class="error"></div>
       </div>
-      <!--<div class="row verify">
-        <input type="text" class="text large" name="code" placeholder="验证码(必填)"/>
-        <img style="float: right;width: 42%;" src="{:U('verify')}" class="passcode" title="点击刷新" />
-        <div class="error"></div>
-      </div>-->
       <div class="row">
         <div class="button large dark submit" id="submit">注册</div>
         <div class="error"></div>
@@ -51,37 +45,121 @@
         <span class="text light">已有帐号，</span>
         <a href="{:U('login')}" class="text dark">去登录</a>
       </div>
+      <script>
+        var needVerifyCode = true;
+      </script>
     </form>
+    <div class="platform">
+      <div class="desc">
+        使用第三方帐号快速注册
+      </div>
+      <div id="login-wechat" class="platform-item" title="使用微信登录">
+        <i class="icon icon-wechat"></i>
+      </div>
+    </div>
+    <!--<div class="row right">
+      <span class="text light">创建账号即视为已同意</span>
+      <a href="#" target="_blank" class="text dark agreement">服务条款</a>
+    </div>-->
+  </div>
+</div>
+<div id="reg-validate" class="dlg">
+  <div class="header">请输入验证码</div>
+  <div class="body">
+    <div class="validate-text">
+      <span>验证码：</span>
+      <input type="text" class="text" id="validate-text" >
+    </div>
+    <div class="validate-change">
+      <!--<canvas id="canvas" width="120" height="40" class="changeValidateImg"></canvas>-->
+      <img style="float: right;width: 42%;" src="{:U('verify')}" class="passcode" title="点击刷新" />
+      <br>
+      <span class="change-validate-img">看不清，换一张</span>
+    </div>
+  </div>
+  <div class="buttons">
+    <a id="reg-validate-btn" class="button dark small">确定</a>
+    <div class="button light small" onclick="$('#reg-validate').dlg('close')">取消</div>
   </div>
 </div>
 </body>
 </html>
 <script src="__STATIC__/js/jquery.min.js"></script>
 <script>
-  function checkPhone(){
-    var username = $.trim($('#userName').val());
-    //if(!/^1[34578]\d{9}$/.test(username) && !(/^[a-z0-9._%-]+@([a-z0-9-]+\.)+[a-z]{2,4}$|^1[3|4|5|7|8]\d{9}$/.test(username))){
-    if(!/^1[34578]\d{9}$/.test(username)){
-      $('#userName').parent().find('.error').show().html('请输入正确的手机号！');
-      $('#userName').focus();
-      return false;
-    }else{
-      $('#userName').parent().find('.error').hide()
-      return username;
+
+  function setError(element, msg){
+    var error = element.parent().find('.error');
+    if(msg) {
+      element.addClass('item-error');
+      error.show().html(msg);
+    }else {
+      element.removeClass('item-error');
+      error.hide();
     }
   }
 
-  $(function () {
+  function checkInput(){
+    var isCheck = true;
+    $("input.isCheck").each(function(){
+      var self = $(this);
+      var input_name = self.attr('name');
+      if($.trim(self.val()) == ''){
+        var msg = '请输入'+self.attr('title');
+        setError(self, msg);
+        isCheck = false;
+      }else{
+        switch (input_name){
+          case 'phone':
+            if (!/^1[34578]\d{9}$/.test(self.val())){
+              setError(self, '请输入正确的手机号');
+              isCheck = false;
+            }else{
+              setError(self);
+            }
+            break;
+          case 'code':
+            if (!/^\d{4}$/.test(self.val())){
+              setError(self, '请输入正确的验证码');
+              isCheck = false;
+            }else{
+              setError(self);
+            }
+            break;
+          case 'password':
+            if (self.val().length < 6 || self.val().length > 20){
+              setError(self, '请输入正确的验证码');
+              isCheck = false;
+            }else{
+              setError(self);
+            }
+            break;
+          case 'nickname':
+            $.post(self.attr('url'), {nickname:self.val()},function(data){
+              if(data.status!=200){
+                setError(self, data.info);
+              }else{
+                setError(self);
+              }
+            }, 'json');
+            break;
+          default:
+            setError(self);
+        }
+      }
+    });
+    return isCheck;
+  }
+
+  $(function(){
     $("#main-form").submit(function(){
       var self = $(this);
-      $.post(self.attr("action"), self.serialize(), success, "json");
+      $.post(self.attr('action'), self.serialize(), success, 'json');
       return false;
 
       function success(data){
-        var obj = $('#submit').parent().find('.error');
-        obj.show().html(data.info);
+        setError($('#submit'), data.info);
         if(data.status){
-          obj.show().css('color','green');
+          $('#submit').parent().find('.error').css('color', 'green');
           setTimeout(function () {
             window.location.href = data.url;
           }, 3000);
@@ -89,25 +167,68 @@
       }
     });
 
-    $('#submit').click(function(){
-      if(checkPhone()){
-        var obj = $('#passWord').parent().find('.error');
-        obj.show().text('');
-        if($('#passWord').val().length < 6){
-          obj.show().text('密码长度不得小于6位');return;
-        }
+    $('#submit').click(function () {
+      if(checkInput()){
         $("#main-form").submit();
       }
     });
 
-    $(".passcode").click(function(){
-      var verifyimg = $(this).attr("src");
-      if( verifyimg.indexOf('?')>0){
-        $(this).attr("src", verifyimg+'&random='+Math.random());
-      }else{
-        $(this).attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+    $(document).keydown(function(event){
+      if(event.keyCode == 13){
+        $('#submit').click();
+        return false;
+      }
+    });
+
+    $("input.text").on('blur', function(){
+      var self = $(this);
+      self.removeClass('item-error');
+      if(self.attr('name') == 'nickname' && self.val()){
+        $.post(self.attr('url'), {nickname:self.val()},function(data){
+          if(data.status!=200){
+            setError(self, data.info);
+          }
+        }, 'json');
+      }
+    });
+
+    $("#fetch-code").click(function(){
+      if($(this).text() == '获取验证码'){
+        var phone_input = $("input[name=phone]");
+        if(!phone_input.val()){
+          setError(phone_input, '请输入手机号');
+          return false;
+        }else{
+          if (!/^1[34578]\d{9}$/.test(phone_input.val())){
+            setError(phone_input, '请输入正确的手机号');
+            return false;
+          }else{
+            setError(phone_input);
+          }
+        }
+        $(this).text("发送中..");
+        var time = 60;
+        var self = $(this);
+        $.post(self.attr('url'), {
+          phone: $("input[name=phone]").val()
+        }, function(data){
+          if(data.status == 200){
+            var t = setInterval(function(){
+              time--;
+              self.text("已发送(" + time + ")");
+              if(time == 0){
+                clearInterval(t);
+                self.text("获取验证码");
+              }
+            }, 1000);
+          }else{
+            alert('获取验证码错误');
+            self.text("获取验证码");
+          }
+        });
       }
     });
 
   });
+
 </script>

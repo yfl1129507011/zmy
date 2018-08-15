@@ -14,14 +14,14 @@ class UserController extends Controller{
     public function _initialize()
     {
         # 定义网站title
-        $this->title = '众妙云';
+        $this->title = '众上数字极品';
     }
 
     public function login(){
         $back = I('back');
         if(IS_POST){
             //登录
-            $username 	= trim(I('post.username', ''));		//账号
+            $username 	= trim(I('post.phone', ''));		//账号
             $password 	= trim(I('post.password', ''));		//密码
             //不能为空
             if (empty($username)) $this->error('账号不能为空！');
@@ -53,9 +53,9 @@ class UserController extends Controller{
             /*if(!check_verify($data['code'])){
                 $this->error('验证码输入错误！');
             }*/
-            if($data['password'] != $data['repassword']){
+            /*if($data['password'] != $data['repassword']){
                 $this->error('密码和重复密码不一致！');
-            }
+            }*/
             $uid = D('User')->register($data);
             if($uid>0){
                 $this->success('注册成功！', U('Index/index'));
@@ -89,6 +89,22 @@ class UserController extends Controller{
         );
         $verify = new \Think\Verify($config);
         $verify->entry(1);
+    }
+
+    public function getCode(){
+        $this->ajaxReturn(array('status'=>200));
+    }
+
+    public function checkNick(){
+        $nickname = remove_xss(I('post.nickname'));
+        $data = array();
+        $data['status'] = 200;
+        if(D('User')->checkNick($nickname)){
+            $data['status'] = 404;
+            $data['info'] = '昵称已被占用';
+        }
+
+        $this->ajaxReturn($data);
     }
 
     /**

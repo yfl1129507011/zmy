@@ -30,9 +30,9 @@ class HomeController extends Controller{
 
     protected function _initialize(){
         $this->userInfo = is_login();
-        if($this->is_visit_log){
+        /*if($this->is_visit_log){
             $this->visit_uid = $this->addUserInfo();
-        }
+        }*/
     }
 
     /**

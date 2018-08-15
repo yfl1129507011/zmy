@@ -14,7 +14,7 @@ class UserModel extends Model{
     /* 用户模型自动验证 */
     protected $_validate = array(
         //验证用户名
-        array('username', '1,30', '用户名长度不合法', self::EXISTS_VALIDATE, 'length'),
+        array('nickname', '1,30', '用户名长度不合法', self::EXISTS_VALIDATE, 'length'),
 
         /* 验证密码 */
         array('password', '6,30', '密码长度必须在6-30个字符之间！', self::EXISTS_VALIDATE, 'length', self::MODEL_INSERT),
@@ -34,7 +34,7 @@ class UserModel extends Model{
         if(empty($username) || empty($password)) {
             $this->error = '未知错误';return false;
         }
-        $where['username'] = $username;
+        $where['phone'] = $username;
         $info = $this->where($where)->find();
         if(empty($info)){
             $this->error = '账号不存在';return false;
@@ -52,15 +52,11 @@ class UserModel extends Model{
 
     public function register($data){
         if(empty($data)) return false;
-        if(isMobile($data['username'])) {
-            $data['mobile'] = $data['username'];
-        } elseif (isEmail($data['username'])){
-            $data['email'] = $data['username'];
-        }else {
-            return -12;
+        if(!isMobile($data['phone'])) {
+            return -9;
         }
 
-        $where['username'] = $data['username'];
+        $where['phone'] = $data['phone'];
         $info = $this->where($where)->find();
         if($info){
             return -11;
@@ -76,6 +72,13 @@ class UserModel extends Model{
         }
     }
 
+    public function checkNick($nickname){
+        if(empty($nickname)) return false;
+
+        $res = $this->where(array('nickname'=>$nickname))->find();
+
+        return $res ? true : false;
+    }
 
     /**
      * 注销当前用户
@@ -106,7 +109,7 @@ class UserModel extends Model{
         /* 记录登录SESSION和COOKIES */
         $auth = array(
             'uid'             => $user['uid'],
-            'username'        => $user['username'],
+            'nickname'        => $user['nickname'],
         );
 
         session('user_auth_zm', $auth);

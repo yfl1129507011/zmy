@@ -2,126 +2,146 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>登录-{$title}</title>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="#" />
-    <link rel="stylesheet" href="__CSS__/sign.css"/>
-    <link rel="stylesheet" href="__CSS__/inout.css"/>
+  <title>登录-{$title}</title>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit"/>
+  <meta name="viewport"
+        content="width=device-width, viewport-fit=cover, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="__CSS__/sign.css"/>
+  <link rel="stylesheet" href="__CSS__/inout.css"/>
 </head>
 <body>
 <div class="reg-wrapper" >
-    <h2 style="margin: 15px 0" >
-        <a href="/">
-            <!--<img class="logo" src="__IMG__/u45.png"/>-->
-            <span style="font-weight: bold;font-size: 22px;">{$title}</span>
-        </a>
-    </h2>
-    <h3 style="font-weight: bold;">登录</h3>
-    <div class="fields">
-        <form action="__SELF__" id="main-form">
-            <div class="row">
-                <input type="text" class="text large" name="username" id="userName" placeholder="手机号"/>
-                <div class="error"></div>
-            </div>
-            <div class="row">
-                <input type="password" class="text large" name="password" id="passWord" placeholder="密码"/>
-                <div class="error"></div>
-            </div>
-            <div class="row">
-                <label>
-                    <input type="checkbox" name="remember" class="checkbox" value="true" checked/>
-                    记住我
-                </label>
-                <a href="javascript:void();" class="forget text dark" >忘记密码</a>
-            </div>
-            <div class="row">
-                <div class="button large dark submit" id="submit">登录</div>
-                <input type="hidden" name="back" value="{$back}" />
-                <div class="login_error error"></div>
-            </div>
-            <div class="row right">
-                <span class="text light">还没有帐号，</span>
-                <a href="{:U('register')}" class="text dark" id="userregister" >立即注册</a>
-            </div>
-        </form>
+  <h2 >
+    <a href="/">
+      <!-- <img class="logo" src="/asset/img/logo/text-0f5be2e426.png"/> -->
+      <span style="font-weight: bold;font-size: 22px;">{$title}</span>
+    </a>
+  </h2>
+  <h3>登录</h3>
+  <div class="fields">
+    <form id="main-form" action="__SELF__">
+      <div class="row">
+        <input type="text" class="text large" name="phone" placeholder="手机号"/>
+        <div class="error"></div>
+      </div>
+      <div class="row">
+        <input type="password" class="text large" name="password" placeholder="密码"/>
+        <div class="error"></div>
+      </div>
+      <div class="row">
+        <label>
+          <input type="checkbox" name="remember" value="true" checked/>
+          记住我
+        </label>
+        <a href="#" class="forget text dark" >忘记密码</a>
+      </div>
+      <div class="row">
+        <div class="button large dark submit" id="submit">登录</div>
+        <input type="hidden" name="back" value="{$back}" />
+        <div class="error"></div>
+      </div>
+      <div class="row right">
+        <span class="text light">还没有帐号，</span>
+        <a href="{:U('register')}" class="text dark" >立即注册</a>
+      </div>
+    </form>
+    <div class="platform">
+      <div class="desc">
+        使用第三方帐号快速登录
+      </div>
+      <div id="login-wechat" class="platform-item" title="使用微信登录">
+        <i class="icon icon-wechat"></i>
+      </div>
     </div>
+  </div>
 </div>
 </body>
 </html>
 <script src="__STATIC__/js/jquery.min.js"></script>
 <script src="__STATIC__/js/cookie.js"></script>
 <script>
+  var phone_input = $("input[name='phone']");
+  var pwd_input = $("input[name='password']");
 
-    function login_init(){
-        var username = getcookie('username');
-        var password = getcookie('password');
-        if(username && password){
-            $('#userName').val(username);
-            $('#passWord').val(password);
-        }else{
-            $('#userName').focus();
-        }
+  function login_init(){
+    var phone = getcookie('phone');
+    var password = getcookie('password');
+    if(phone && password){
+      phone_input.val(phone);
+      pwd_input.val(password);
+    }else{
+      phone_input.focus();
     }
-
-  function checkLoginInput(){
-    var loginName = $('#userName').val();
-    var loginPWD = $('#passWord').val();
-    if(loginName == ''){
-      $('#userName').parent().find('.error').show().html('请输入您的登录账号！');
-      //$('.error').show().html('请输入您的登录账号！');
-      $('#userName').focus();
-      return false;
-    }
-    $('#userName').parent().find('.error').hide();
-    /*var patt = new RegExp("^([0-9a-zA-Z]([-_.\w]*[0-9a-zA-Z])*@(([0-9a-zA-Z])+([-_\w]*[0-9a-zA-Z])*\.)+[a-zA-Z]{2,9})$");
-     if(!patt.test(loginName)){
-     $('.error').show().html('请输入正确的邮箱！');
-     $('#userName').focus();
-     return false;
-     }*/
-    if(loginPWD == ''){
-      $('#passWord').parent().find('.error').show().html('请输入您的密码！');
-      //$('.error').show().html('请输入您的密码！');
-      $('#passWord').focus();
-      return false;
-    }
-      $('#passWord').parent().find('.error').hide();
-    $('.error').html('');
-    return true;
   }
 
-  function save_username() {
-    if($(".checkbox").prop('checked')){
-      setcookie('username', $('#userName').val(), 365);
-      setcookie('password', $('#passWord').val(), 365);
+  function setError(element, msg){
+    var error = element.parent().find('.error');
+    if(msg) {
+      element.addClass('item-error');
+      error.show().html(msg);
+    }else {
+      element.removeClass('item-error');
+      error.hide();
+    }
+  }
+
+  function checkInput(){
+    var phone = phone_input.val();
+    var pwd = pwd_input.val();
+    if(!phone){
+      setError(phone_input, '请输入手机号');
+      phone_input.focus();
     }else{
-      delcookie('username');
+      setError(phone_input);
+    }
+    if(!pwd){
+      setError(pwd_input,'请输入密码');
+      if(phone){
+        pwd_input.focus();
+      }
+    }else{
+      setError(pwd_input);
+    }
+
+    if(phone && pwd){
+      return true;
+    }
+
+    return false;
+  }
+
+  function remember(){
+    if($("input[name='remember']").prop('checked')){
+      setcookie('phone', phone_input.val(), 365);
+      setcookie('password', pwd_input.val(), 365);
+    }else{
+      delcookie('phone');
       delcookie('password');
     }
   }
 
   $(function(){
-      login_init();
-    $("#main-form").submit(function(){
+    login_init();
+    $("#main-form").submit(function () {
       var self = $(this);
-      $.post(self.attr("action"), self.serialize(), success, "json");
+      $.post(self.attr('action'), self.serialize(), success, 'json');
       return false;
 
       function success(data){
         if(data.status == 1){
-          save_username();
+          remember();
           window.location.href = data.url;
-        } else {
-          $('#userlogin').val('登录');
-          $('.login_error').show().html(data.info);
+        }else{
+          $('#submit').text('登录');
+          setError($('#submit'), data.info);
         }
       }
     });
 
-    $('#submit').on('click',function(){
-      if(checkLoginInput()){
+    $("#submit").on('click', function () {
+      if(checkInput()){
         $(this).text('登录中...');
         $("#main-form").submit();
       }
@@ -129,9 +149,13 @@
 
     $(document).keydown(function(event){
       if(event.keyCode == 13){
-        $('#submit').click();return false;
+        $('#submit').click();
+        return false;
       }
     });
 
-  });
+    $("input.text").on('blur', function(){
+      $(this).removeClass('item-error');
+    });
+  })
 </script>

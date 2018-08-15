@@ -1069,7 +1069,7 @@ th, td {
 }
 
 .fields .row.right {
-    text-align: right
+    text-align: center;
 }
 
 .fields .row .error {
