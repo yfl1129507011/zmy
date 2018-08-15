@@ -108,9 +108,10 @@
         setError(self, msg);
         isCheck = false;
       }else{
+        var _val = $.trim(self.val());
         switch (input_name){
           case 'phone':
-            if (!/^1[34578]\d{9}$/.test(self.val())){
+            if (!/^1[34578]\d{9}$/.test(_val)){
               setError(self, '请输入正确的手机号');
               isCheck = false;
             }else{
@@ -118,7 +119,7 @@
             }
             break;
           case 'code':
-            if (!/^\d{4}$/.test(self.val())){
+            if (!/^\d{4}$/.test(_val)){
               setError(self, '请输入正确的验证码');
               isCheck = false;
             }else{
@@ -134,7 +135,7 @@
             }
             break;
           case 'nickname':
-            $.post(self.attr('url'), {nickname:self.val()},function(data){
+            $.post(self.attr('url'), {nickname:_val},function(data){
               if(data.status!=200){
                 setError(self, data.info);
               }else{

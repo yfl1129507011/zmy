@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -19,7 +19,7 @@
           <li><a href="#supervise">项目监管</a></li>
           <li><a href="#detection">售后检测</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
+        <!--<ul class="nav navbar-nav navbar-right">
           <if condition="$userInfo['uid'] eq 0">
             <li><a href="{:U('User/login')}">登录</a></li>
             <li class="active"><a href="{:U('User/register')}">注册</a></li>
@@ -31,7 +31,22 @@
               </ul>
             </li>
           </if>
-        </ul>
+        </ul>-->
+        <if condition="$userInfo['uid'] eq 0">
+          <div class="navbar-form navbar-right">
+            <button type="submit" class="btn btn-primary" onclick="location.href='{:U("User/login")}'">登录</button>
+            <button type="submit" class="btn btn-success" onclick="location.href='{:U("User/register")}'">注册</button>
+          </div>
+        <else/>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$userInfo['nickname']} <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{:U('User/logout')}">退出登录</a></li>
+              </ul>
+            </li>
+          </ul>
+        </if>
       </div>
     </div>
   </nav>
