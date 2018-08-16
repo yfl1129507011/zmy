@@ -58,7 +58,7 @@ class UserController extends Controller{
             }*/
             $uid = D('User')->register($data);
             if($uid>0){
-                $this->success('注册成功！', U('Index/index'));
+                $this->success('注册成功！跳转中..', U('Index/index'));
             }else{
                 if(is_numeric($uid)) {
                     $this->error(self::showRegError($uid));

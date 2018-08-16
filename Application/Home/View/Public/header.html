@@ -1,5 +1,4 @@
-<header>
-  <nav class="navbar navbar-inverse navbar-fixed-top">
+ <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -12,12 +11,24 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
         <ul class="nav navbar-nav" id="nav-menu">
-          <li class="active"><a href="#share">研究分享</a></li>
-          <li><a href="#idea">项目提案</a></li>
-          <li><a href="#design">产品设计</a></li>
-          <li><a href="#buy">采购</a></li>
-          <li><a href="#supervise">项目监管</a></li>
-          <li><a href="#detection">售后检测</a></li>
+          <li <if condition="CONTROLLER_NAME eq share"> class="active" </if>>
+            <a href="#share"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span> 研究分享</a>
+          </li>
+          <li <if condition="CONTROLLER_NAME eq Idea"> class="active" </if>>
+            <a href="{:U('Idea/index')}"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> 项目提案</a>
+          </li>
+          <li <if condition="CONTROLLER_NAME eq design"> class="active" </if>>
+            <a href="#design"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> 产品设计</a>
+          </li>
+          <li <if condition="CONTROLLER_NAME eq buy"> class="active" </if>>
+            <a href="#buy"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 采购</a>
+          </li>
+          <li <if condition="CONTROLLER_NAME eq supervise"> class="active" </if>>
+            <a href="#supervise"><span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span> 项目监管</a>
+          </li>
+          <li <if condition="CONTROLLER_NAME eq detection"> class="active" </if>>
+            <a href="#detection"><span class="glyphicon glyphicon-bishop" aria-hidden="true"></span> 售后监测</a>
+          </li>
         </ul>
         <!--<ul class="nav navbar-nav navbar-right">
           <if condition="$userInfo['uid'] eq 0">
@@ -40,8 +51,13 @@
         <else/>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$userInfo['nickname']} <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                {$userInfo['nickname']}
+                <span class="caret"></span>
+              </a>
               <ul class="dropdown-menu">
+                <li><a href="#">个人中心</a></li>
                 <li><a href="{:U('User/logout')}">退出登录</a></li>
               </ul>
             </li>
@@ -50,4 +66,3 @@
       </div>
     </div>
   </nav>
-</header>

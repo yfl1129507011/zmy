@@ -4,7 +4,7 @@ return array(
 
     // mysql数据库配置信息
     'DB_TYPE'   => 'mysqli', // 数据库类型
-    'DB_NAME'   => 'zhongmiao', // 数据库名
+    'DB_NAME'   => 'zhongshang', // 数据库名
     'DB_HOST'   => 'localhost', // 服务器地址
     'DB_USER'   => 'root', // 用户名
     'DB_PWD'    => '123456',  // 密码
