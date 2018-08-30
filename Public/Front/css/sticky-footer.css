@@ -12,15 +12,12 @@
     position: fixed;
     right: 10px;
     bottom: 10px;
-    background: rgba(230, 126, 34, 0.6);
+    background: #a9334c;
     color: #ffffff;
     text-align: center;
     border-radius: 2px;
     z-index: 1;
+    padding: 5px;
+    cursor: pointer;
     display: none;
-}
-#back-to-top i {
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
 }

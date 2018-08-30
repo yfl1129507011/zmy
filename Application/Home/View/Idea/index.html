@@ -1,8 +1,80 @@
 <extend name="Public/common"/>
-<block name="style"></block>
+<block name="style">
+  <link rel="stylesheet" href="__CSS__/idea.css">
+</block>
 <block name="body">
-  <div class="container">
-    <div class="jumbotron"></div>
+  <div id="left-chart-nav">
+    <ul>
+      <li class="active">
+        <a href="#"><b class="caret-r"></b> 用户需求特征提案</a>
+        <ul class="left-chart-menu">
+          <li><a href="">用户洞察</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#"><b class="caret-r"></b> 新原料产品提案</a>
+        <ul class="left-chart-menu">
+          <li><a href="">原料知识</a></li>
+          <li><a href="">产品分析</a></li>
+          <li><a href="">用户洞察</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#"><b class="caret-r"></b> 爆品提案</a>
+        <ul class="left-chart-menu">
+          <li><a href="">爆品分析</a></li>
+          <li><a href="">用户洞察</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#"><b class="caret-r"></b> 替换产品提案</a>
+        <ul class="left-chart-menu">
+          <li><a href="">待替换产品选择</a></li>
+          <li><a href="">用户洞察</a></li>
+          <li><a href="">替换产品选择</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div id="main-container">
+    <ol class="breadcrumb">
+      <li><a href="#">众上极品</a></li>
+      <li><a href="#">项目提案</a></li>
+      <li><a href="#">用户需求特征提案</a></li>
+      <li>用户洞察</li>
+    </ol>
+    <div class="search-box">
+      <div class="search-nav">
+        <input type="text" class="search">
+        <input type="button" class="search-btn" value="搜索">
+        <input type="button" class="filter-btn" isopen="1" value="展开筛选">
+      </div>
+      <div class="filter-box">
+        <span>渠道</span>
+        <input type="checkbox">自营
+        <input type="checkbox">天猫
+        <input type="checkbox">淘宝
+      </div>
+    </div>
   </div>
 </block>
-<block name="script"></block>
+<block name="script">
+  <script>
+    $(function(){
+      $('.filter-btn').click(function(){
+        var self = $(this);
+        var inx = self.attr('isopen');
+        if(inx == 1){
+          self.attr('isopen', 0);
+          self.val('收起筛选');
+          $('.filter-box').show();
+        }else{
+          self.attr('isopen', 1);
+          self.val('展开筛选');
+          $('.filter-box').hide();
+        }
+        return false;
+      });
+    });
+  </script>
+</block>

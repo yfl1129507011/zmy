@@ -1,60 +1,150 @@
-<extend name="Public/common"/>
-<block name="style">
-</block>
-<block name="body">
-  <div class="jumbotron">
-    <div class="container">
-      <div class="row" style="margin-top: 100px">
-        <div class="col-xs-6 col-md-3">
-          <div class="thumbnail">
-            <img data-src="holder.js/100%x200" alt="100%x200" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
-            <div class="caption" style="text-align: center;">
-              <h3>研究分享</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <div class="thumbnail">
-            <img data-src="holder.js/100%x200" alt="100%x200" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
-            <div class="caption" style="text-align: center;">
-              <h3>项目提案</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <div class="thumbnail">
-            <img data-src="holder.js/100%x200" alt="100%x200" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
-            <div class="caption" style="text-align: center;">
-              <h3>产品设计</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <div class="thumbnail">
-            <img data-src="holder.js/100%x200" alt="100%x200" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
-            <div class="caption" style="text-align: center;">
-              <h3>采购</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <div class="thumbnail">
-            <img data-src="holder.js/100%x200" alt="100%x200" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
-            <div class="caption" style="text-align: center;">
-              <h3>项目监管</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <div class="thumbnail">
-            <img data-src="holder.js/100%x200" alt="100%x200" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
-            <div class="caption" style="text-align: center;">
-              <h3>售后监测</h3>
-            </div>
-          </div>
-        </div>
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link rel="icon" href="favicon.ico">
+  <title>众妙云-首页</title>
+  <link rel="stylesheet" href="__CSS__/sticky-footer.css">
+  <link rel="stylesheet" href="__CSS__/main.css">
+  <script src="__STATIC__/js/jquery.min.js"></script>
+  <script src="__JS__/main.js"></script>
+  <script type="text/javascript">
+    <!--
+    if(self != top){
+      top.location = self.location;
+    }
+    //-->
+  </script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="//{$Think.server.http_host}/" class="navbar-brand">
+          <img src="__IMG__/logo.png" alt="" class="navbar-logo">
+        </a>
+      </div>
+      <div class="navbar-collapse">
+        <ul class="navbar-nav navbar-left">
+          <li class="active" link="share">
+            <a href="#">研究分享</a>
+          </li>
+          <li link="idea">
+            <a href="#">项目提案</a>
+          </li>
+          <li link="design">
+            <a href="#">产品设计</a>
+          </li>
+          <li link="buy">
+            <a href="#">采购</a>
+          </li>
+          <li link="supervise">
+            <a href="#">项目监管</a>
+          </li>
+          <li link="detection">
+            <a href="#">售后检测</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-right">
+          <if condition="$userInfo['uid'] eq 0">
+            <li><a href="{:U('User/login')}">登录</a></li>
+            <li><a href="{:U('User/register')}">注册</a></li>
+          <else/>
+            <li>
+              <a href="" class="dropdown-toggle">
+                {$userInfo['nickname']}
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#">个人中心</a></li>
+              </ul>
+            </li>
+            <li><a href="{:U('User/logout')}">退出</a></li>
+          </if>
+        </ul>
       </div>
     </div>
+  </nav>
+  <div id="left-chart-nav">
+    <ul style="display: block" id="share">
+      <li class="active">
+        <a href="#"><b class="caret-r"></b> 信息共享</a>
+        <ul class="left-chart-menu">
+          <li><a href="">新技术</a></li>
+          <li><a href="">新产品</a></li>
+          <li><a href="">新动态</a></li>
+          <li><a href="">法律法规</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#"><b class="caret-r"></b> 知识共享</a>
+        <ul class="left-chart-menu">
+          <li><a href="">产品知识</a></li>
+          <li><a href="">原料知识</a></li>
+          <li><a href="">包材知识</a></li>
+          <li><a href="">配方工艺</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#"><b class="caret-r"></b> 市场研究</a>
+        <ul class="left-chart-menu">
+          <li><a href="">用户研究</a></li>
+          <li><a href="">产品研究</a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul id="idea">
+      <li class="active">
+        <a href="#"><b class="caret-r"></b> 用户需求特征提案</a>
+        <ul class="left-chart-menu">
+          <li><a href="{:U('Idea/user_insight', array('by'=>0))}">用户洞察</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#"><b class="caret-r"></b> 新原料产品提案</a>
+        <ul class="left-chart-menu">
+          <li><a href="{:U('Idea/material_knowledge')}">原料知识</a></li>
+          <li><a href="{:U('Idea/material_analyze')}">产品分析</a></li>
+          <li><a href="{:U('Idea/user_insight', array('by'=>1))}">用户洞察</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#"><b class="caret-r"></b> 爆品提案</a>
+        <ul class="left-chart-menu">
+          <li><a href="{:U('Idea/hot_analyze')}">爆品分析</a></li>
+          <li><a href="{:U('Idea/user_insight', array('by'=>2))}">用户洞察</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#"><b class="caret-r"></b> 替换产品提案</a>
+        <ul class="left-chart-menu">
+          <li><a href="{:U('Idea/replace_from')}">待替换产品选择</a></li>
+          <li><a href="{:U('Idea/user_insight', array('by'=>3))}">用户洞察</a></li>
+          <li><a href="{:U('Idea/replace_to')}">替换产品选择</a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul id="design">
+      <li class="active">
+        <a href="#">主材选择</a>
+      </li>
+      <li>
+        <a href="#">包材选择</a>
+      </li>
+      <li>
+        <a href="#">包装设计</a>
+      </li>
+      <li>
+        <a href="#">文案设计</a>
+      </li>
+    </ul>
   </div>
-</block>
-<block name="script"></block>
+  <div id="main-container"></div>
+
+  <div id="back-to-top">置顶</div>
+</body>
+</html>

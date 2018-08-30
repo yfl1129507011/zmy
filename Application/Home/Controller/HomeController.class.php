@@ -26,10 +26,11 @@ class HomeController extends Controller{
             header('Location: ' . U('User/login').'?back='.urlencode($jumpUrl));exit;
         }
         define('UID', $user['uid']);
+        $this->userInfo = is_login();
     }
 
     protected function _initialize(){
-        $this->userInfo = is_login();
+        $this->checkLogin();
         /*if($this->is_visit_log){
             $this->visit_uid = $this->addUserInfo();
         }*/

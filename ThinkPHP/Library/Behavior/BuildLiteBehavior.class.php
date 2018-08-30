@@ -23,6 +23,7 @@ class BuildLiteBehavior
         }
 
         $litefile = C('RUNTIME_LITE_FILE', null, RUNTIME_PATH . 'lite.php');
+        var_dump($litefile);die;
         if (is_file($litefile)) {
             return;
         }

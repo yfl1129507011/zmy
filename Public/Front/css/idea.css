@@ -1,0 +1,95 @@
+.search-box{
+    padding: 10px 15px;
+}
+.search-nav input{
+    border: 1px solid #293c55;
+    border-radius: 4px;
+    height: 48px;
+    line-height: 48px;
+}
+.search-nav .search{
+    width: 50%;
+    margin-right: 30px;
+    padding: 5px;
+}
+.search-nav .search-btn{
+    width: 100px;
+    color: #f3f3f3;
+    background-color: #293c55;
+}
+.search-nav .filter-btn{
+    width: 80px;
+    background-color: transparent;
+    float: right;
+    cursor: pointer;
+}
+.search-nav .filter-btn:hover,
+.search-nav .filter-btn:focus{
+    color: #f3f3f3;
+    background-color: #293c55;
+}
+.filter-box{
+    border: 1px solid #293c55;
+    margin-top: 15px;
+    border-radius: 4px;
+    display: none;
+}
+.selector-line{
+    padding: 10px;
+}
+.selector-line>span{
+    display: inline-block;
+    width: 80px;
+    padding: 5px 10px;
+}
+.term_filter li{
+    padding: 0 15px;
+    overflow: hidden;
+}
+.term_filter li dt,
+.term_filter li dd{
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    margin-right: 20px;
+    overflow: hidden;
+}
+.term_filter li dt{
+    margin-right: 40px;
+}
+.content-box{
+    margin-top: 20px;
+    /*border: 1px solid #293c55;*/
+}
+.product-info{
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.img-container{
+    margin-right: 20px;
+    padding: 5px;
+}
+.info-container span{
+    display: inline-block;
+    padding: 0 25px 0 5px;
+}
+.info-container p{
+    padding: 3px 0;
+}
+
+.export-box{
+    margin-top: 30px;
+    text-align: center;
+}
+button{
+    padding: 10px;
+    border: 1px solid #293c55;
+    border-radius: 4px;
+    color: #293c55;
+    background-color: #f3f3f3;
+}
+button:focus,
+button:hover{
+    color: #f3f3f3;
+    background-color: #293c55;
+}

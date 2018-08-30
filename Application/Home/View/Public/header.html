@@ -1,68 +1,50 @@
- <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
+<header>
+  <nav class="navbar">
+    <div class="container-fluid">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="//{$Think.server.http_host}/">LOGO</a>
+        <a href="//{$Think.server.http_host}/" class="navbar-brand">
+          <img src="__IMG__/logo.png" alt="" class="navbar-logo">
+        </a>
       </div>
-      <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
-        <ul class="nav navbar-nav" id="nav-menu">
-          <li <if condition="CONTROLLER_NAME eq share"> class="active" </if>>
-            <a href="#share"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span> 研究分享</a>
+      <div class="navbar-collapse">
+        <ul class="navbar-nav navbar-left">
+          <li <if condition="CONTROLLER_NAME eq Index"> class="active" </if>>
+            <a href="{:U('Index/index')}">研究分享</a>
           </li>
           <li <if condition="CONTROLLER_NAME eq Idea"> class="active" </if>>
-            <a href="{:U('Idea/index')}"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> 项目提案</a>
+            <a href="{:U('Idea/index')}">项目提案</a>
           </li>
-          <li <if condition="CONTROLLER_NAME eq design"> class="active" </if>>
-            <a href="#design"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> 产品设计</a>
+          <li <if condition="CONTROLLER_NAME eq Design"> class="active" </if>>
+            <a href="{:U('Design/index')}">产品设计</a>
           </li>
           <li <if condition="CONTROLLER_NAME eq buy"> class="active" </if>>
-            <a href="#buy"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 采购</a>
+            <a href="#">采购</a>
           </li>
           <li <if condition="CONTROLLER_NAME eq supervise"> class="active" </if>>
-            <a href="#supervise"><span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span> 项目监管</a>
+            <a href="#">项目监管</a>
           </li>
           <li <if condition="CONTROLLER_NAME eq detection"> class="active" </if>>
-            <a href="#detection"><span class="glyphicon glyphicon-bishop" aria-hidden="true"></span> 售后监测</a>
+            <a href="#">售后检测</a>
           </li>
         </ul>
-        <!--<ul class="nav navbar-nav navbar-right">
+        <ul class="navbar-nav navbar-right">
           <if condition="$userInfo['uid'] eq 0">
             <li><a href="{:U('User/login')}">登录</a></li>
-            <li class="active"><a href="{:U('User/register')}">注册</a></li>
-            <else/>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$userInfo['nickname']} <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="{:U('User/logout')}">退出登录</a></li>
-              </ul>
-            </li>
-          </if>
-        </ul>-->
-        <if condition="$userInfo['uid'] eq 0">
-          <div class="navbar-form navbar-right">
-            <button type="submit" class="btn btn-primary" onclick="location.href='{:U("User/login")}'">登录</button>
-            <button type="submit" class="btn btn-success" onclick="location.href='{:U("User/register")}'">注册</button>
-          </div>
-        <else/>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <li><a href="{:U('User/register')}">注册</a></li>
+          <else/>
+            <li>
+              <a href="" class="dropdown-toggle">
                 {$userInfo['nickname']}
-                <span class="caret"></span>
+                <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
                 <li><a href="#">个人中心</a></li>
-                <li><a href="{:U('User/logout')}">退出登录</a></li>
               </ul>
             </li>
-          </ul>
-        </if>
+            <li><a href="{:U('User/logout')}">退出</a></li>
+          </if>
+        </ul>
       </div>
     </div>
   </nav>
+</header>

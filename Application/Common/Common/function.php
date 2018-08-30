@@ -404,3 +404,74 @@ function checkJumpUrl($url){
 
     return $jumpUrl;
 }
+
+/**
+ * 二分查找
+ * @param array $data  待搜索的数组
+ * @param $low
+ * @param $high
+ * @param $needle  搜索的值
+ * @return bool
+ */
+function binary_search(array $data, $low, $high, $needle){
+    $_data = $data;
+    asort($_data, SORT_NUMERIC);  // 对数组进行排序
+    $keyArr = array_keys($_data);
+    sort($data, SORT_NUMERIC);
+    if($low <= $high){
+        $key = intval(($low+$high)/2);
+        if($data[$key] == $needle){
+            return $keyArr[$key];
+        }elseif($data[$key] > $needle){
+            return $keyArr[binary_search($data, $low, $key-1, $needle)];
+        }else{
+            return $keyArr[binary_search($data, $key+1, $high, $needle)];
+        }
+    }
+
+    return false;
+}
+
+
+/**
+ * @param array $data 待搜索的数组
+ * @param $needle 搜索的值
+ * @return bool
+ */
+function b_array_search(array $data, $needle){
+    if(empty($data)) return false;
+    $_data = $data;
+    asort($_data, SORT_NUMERIC);
+    $keyArr = array_keys($_data);
+    sort($data, SORT_NUMERIC);
+    $low = 0; $high = count($data)-1;
+    $key = intval(($low+$high)/2);
+    if($key >= 0){
+        $stack = array();
+        if($data[$key] == $needle){
+            return $keyArr[$key];
+        }elseif($data[$key] > $needle){
+            array_push($stack, array('low'=>$low, 'high'=>$key-1));
+        }else{
+            array_push($stack, array('low'=>$key+1, 'high'=>$high));
+        }
+
+        while(!empty($stack)){
+            $node = array_pop($stack);
+            $key = intval(($node['low']+$node['high'])/2);
+            if($key >= 0){
+                if($data[$key] == $needle){
+                    return $keyArr[$key];
+                }elseif($data[$key] > $needle){
+                    array_push($stack, array('low'=>$node['low'], 'high'=>$key-1));
+                }else{
+                    array_push($stack, array('low'=>$key+1, 'high'=>$node['high']));
+                }
+            }else{
+                return false;
+            }
+        }
+    }else{
+        return false;
+    }
+}
